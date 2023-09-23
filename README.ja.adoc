@@ -1,0 +1,35 @@
+= NNabla for GDScript
+:author: MizunagiKB
+:copyright: 2023 MizunagiKB <mizukb@live.jp>
+:doctype: book
+:toc:
+:toclevels: 3
+:lang: ja
+:encoding: utf-8
+:stylesdir: ./doc/res/theme/css
+:stylesheet: adoc-golo.css
+:source-highlighter: highlight.js
+:experimental:
+ifndef::env-github[:icons: font]
+ifdef::env-github,env-browser[]
+endif::[]
+ifdef::env-github[]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+link:README.adoc[English] / link:README.ja.adoc[日本語]
+
+
+== About
+=== Usage
+== More detailed usage
+== Licenses
+== Related Information
+
+* link:https://nnabla.org/[SONY Neural Network Libraries]
+* link:https://github.com/sony/nnabla[sony / nnabla (GitHub)]
+* link:https://github.com/MizunagiKB/gd_nnabla[MizunagiKB / gd_nnabla (GitHub)]

@@ -1,0 +1,7 @@
+{%- if inputs|length == 0 and arguments|length > 0 -%}
+    static Ref<nbla_DataVariable> {{ fn }}({{ arguments }}) { return Ref<nbla_DataVariable>(); }
+{%- elif inputs|length > 0 and arguments|length == 0 -%}
+    static Ref<nbla_DataVariable> {{ fn }}({{ inputs }}) { return Ref<nbla_DataVariable>(); }
+{%- else -%}
+    static Ref<nbla_DataVariable> {{ fn }}({{ inputs }}, {{ arguments }}) { return Ref<nbla_DataVariable>(); }
+{%- endif -%}

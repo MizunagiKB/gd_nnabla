@@ -1,0 +1,17 @@
+[configuration]
+
+entry_symbol = "gd_nnabla_library_init"
+compatibility_minimum = 4.1
+
+[libraries]
+
+macos.debug = "bin/libgd_nnabla.macos.debug.framework"
+macos.release = "bin/libgd_nnabla.macos.release.framework"
+windows.debug.x86_64 = "bin/libgd_nnabla.windows.debug.x86_64.dll"
+windows.release.x86_64 = "bin/libgd_nnabla.windows.release.x86_64.dll"
+# linux.debug.x86_64 = "bin/libgd_nnabla.linux.debug.x86_64.so"
+# linux.release.x86_64 = "bin/libgd_nnabla.linux.release.x86_64.so"
+# linux.debug.arm64 = "bin/libgd_nnabla.linux.debug.arm64.so"
+# linux.release.arm64 = "bin/libgd_nnabla.linux.release.arm64.so"
+# linux.debug.rv64 = "bin/libgd_nnabla.linux.debug.rv64.so"
+# linux.release.rv64 = "bin/libgd_nnabla.linux.release.rv64.so"

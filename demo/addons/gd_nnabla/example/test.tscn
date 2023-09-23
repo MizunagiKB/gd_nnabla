@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgge3i4pw46na"]
+
+[ext_resource type="Script" path="res://addons/gd_nnabla/example/test.gd" id="1_4av2t"]
+
+[node name="test" type="Node2D"]
+script = ExtResource("1_4av2t")
