@@ -41,8 +41,8 @@ void nbla_DataVariable::set_byte(const Ref<nbla_Context> ref_ctx, PackedByteArra
     nbla::VariablePtr variable_ptr = this->_data_variable.variable->variable();
     if(variable_ptr->size() != ary.size()) return;
 
-    u_int8_t* ptr_data = variable_ptr->cast_data_and_get_pointer<u_int8_t>(*ref_ctx->_context);
-    ::memcpy(ptr_data, ary.ptr(), sizeof(u_int8_t) * variable_ptr->size());
+    uint8_t* ptr_data = variable_ptr->cast_data_and_get_pointer<uint8_t>(*ref_ctx->_context);
+    ::memcpy(ptr_data, ary.ptr(), sizeof(uint8_t) * variable_ptr->size());
 }
 
 
@@ -54,7 +54,7 @@ PackedByteArray nbla_DataVariable::get_byte(const Ref<nbla_Context> ref_ctx) con
     nbla::VariablePtr variable_ptr = this->_data_variable.variable->variable();
     ary.resize(variable_ptr->size());
 
-    const u_int8_t* ptr_data = variable_ptr->get_data_pointer<u_int8_t>(*ref_ctx->_context);
+    const uint8_t* ptr_data = variable_ptr->get_data_pointer<uint8_t>(*ref_ctx->_context);
     for(int i = 0; i < variable_ptr->size(); i++) {
         ary.set(i, ptr_data[i]);
     }
