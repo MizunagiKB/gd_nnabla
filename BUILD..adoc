@@ -1,0 +1,94 @@
+= Build NNabla for Godot Engine
+:author: MizunagiKB
+:copyright: 2023 MizunagiKB <mizukb@live.jp>
+:doctype: book
+:toc:
+:toclevels: 3
+:lang: ja
+:encoding: utf-8
+:stylesdir: ./doc/res/theme/css
+:stylesheet: adoc-golo.css
+:source-highlighter: highlight.js
+:experimental:
+ifndef::env-github[:icons: font]
+ifdef::env-github,env-browser[]
+endif::[]
+ifdef::env-github[]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+== How to build
+=== Build for Windows
+
+[source, shell]
+----
+pushd thirdparty
+
+git clone https://github.com/sony/nnabla-ext-cuda
+git clone https://github.com/MizunagiKB/nnabla
+cd nnabla
+git checkout custom-cmake
+
+REM set path="C:\Program Files\CMake\bin";%PATH%;
+
+set NNABLA_DEPS_BASE=%CD%\third_party
+set CMAKE_PREFIX_PATH=%NNABLA_DEPS_BASE%\inst_hdf5-hdf5-1_12_2
+set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%NNABLA_DEPS_BASE%\inst_libarchive-3.7.2
+set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%NNABLA_DEPS_BASE%\inst_lz4-1.9.4
+set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%NNABLA_DEPS_BASE%\inst_protobuf-3.20.1
+set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%NNABLA_DEPS_BASE%\inst_zlib-1.3
+set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%NNABLA_DEPS_BASE%\inst_zstd-1.5.5
+
+mkdir build.cmake
+cd build.cmake
+
+cmake .. ^
+    -DCMAKE_BUILD_TYPE=Release ^
+    -DPYTHON_COMMAND_NAME=python ^
+    -DBUILD_PYTHON_PACKAGE=OFF ^
+    -DBUILD_CPP_UTILS=ON ^
+    -DNBLA_BUILD_SHARED_LIBS=OFF ^
+    -DNNABLA_UTILS_WITH_HDF5=ON
+cmake --build .
+
+popd
+
+scons platform=windows arch=x86_64 target=template_debug
+scons platform=windows arch=x86_64 target=template_release
+----
+
+=== Build for macOS
+
+[source, bash]
+----
+pushd thirdparty
+
+git clone https://github.com/sony/nnabla-ext-cuda
+git clone https://github.com/MizunagiKB/nnabla
+cd nnabla
+git checkout custom-cmake
+
+mkdir build.cmake
+cd build.cmake
+
+cmake .. \
+    -DNBLA_BUILD_SHARED_LIBS=OFF \
+    -DBUILD_CPP_UTILS=ON \
+    -DBUILD_PYTHON_PACKAGE=OFF \
+    -DNNABLA_UTILS_WITH_HDF5=ON \
+    -DNNABLA_UTILS_STATIC_LINK_DEPS=ON \
+    -DCMAKE_BUILD_TYPE=Debug
+make
+
+popd
+
+python src.gen/src.gen.py
+
+scons platform=macos arch=arm64 target=template_debug
+scons platform=macos arch=arm64 target=template_release
+----
+

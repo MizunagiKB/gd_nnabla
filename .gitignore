@@ -26,8 +26,3 @@ mono_crash.*.json
 
 src/gd_nbla_function.cpp.inc
 src/gd_nbla_function.hpp.inc
-
-
-# for NNC
-thirdparty/nnabla
-thirdparty/nnabla-ext-cuda
