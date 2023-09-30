@@ -75,17 +75,27 @@ git clone https://github.com/MizunagiKB/nnabla
 cd nnabla
 git checkout custom-cmake
 
+NNABLA_DEPS_BASE=$PWD/third_party
+CMAKE_PREFIX_PATH="$NNABLA_DEPS_BASE/inst_hdf5-hdf5-1_12_2"
+CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH;$NNABLA_DEPS_BASE/inst_libarchive-3.7.2"
+CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH;$NNABLA_DEPS_BASE/inst_lz4-1.9.4"
+CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH;$NNABLA_DEPS_BASE/inst_protobuf-3.20.1"
+CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH;$NNABLA_DEPS_BASE/inst_zlib-1.3"
+CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH;$NNABLA_DEPS_BASE/inst_zstd-1.5.5"
+export CMAKE_PREFIX_PATH
+echo $CMAKE_PREFIX_PATH
+
 mkdir build.cmake
 cd build.cmake
 
 cmake .. \
-    -DNBLA_BUILD_SHARED_LIBS=OFF \
-    -DBUILD_CPP_UTILS=ON \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DPYTHON_COMMAND_NAME=python \
     -DBUILD_PYTHON_PACKAGE=OFF \
-    -DNNABLA_UTILS_WITH_HDF5=ON \
-    -DNNABLA_UTILS_STATIC_LINK_DEPS=ON \
-    -DCMAKE_BUILD_TYPE=Debug
-make
+    -DBUILD_CPP_UTILS=ON \
+    -DNBLA_SHARED_LIBS=OFF \
+    -DNNABLA_UTILS_WITH_HDF5=ON
+cmake --build . --prefix=Release
 
 popd
 
