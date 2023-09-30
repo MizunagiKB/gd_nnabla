@@ -8,18 +8,17 @@ debug_or_release = "release" if env["target"] == "template_release" else "debug"
 
 if env["platform"] == "windows":
     if debug_or_release == "release":
-        folder_name ="Release"
+        folder_name = "Release"
     else:
         folder_name = "Debug"
 
     libraries = [
-        "nnabla_cli",
         "nnabla_utils",
         "nnabla",
-        "hdf5.lib",
-        "hdf5_hl.lib",
-        "archive.lib",
-        "libprotobuf"
+        "hdf5",
+        "hdf5_hl",
+        "archive",
+        "protobuf",
     ]
 
     env.Append(
@@ -27,7 +26,7 @@ if env["platform"] == "windows":
             "thirdparty/nnabla/build.cmake/bin/{:s}".format(folder_name),
             "thirdparty/nnabla/third_party/inst_hdf5-hdf5-1_12_2/lib",
             "thirdparty/nnabla/third_party/inst_libarchive-3.7.2/lib",
-            "thirdparty/nnabla/third_party/inst_protobuf-3.20.1/lib"
+            "thirdparty/nnabla/third_party/inst_protobuf-3.20.1/lib",
         ]
     )
     env.Append(LIBS=libraries)
@@ -35,22 +34,20 @@ else:
     env.Append(
         LIBPATH=[
             "thirdparty/nnabla/build.cmake/lib",
-            "thirdparty/nnabla/third_party/hdf5-hdf5-1_12_2/build.cmake/bin",
-            "thirdparty/nnabla/third_party/protobuf-3.19.6/build.cmake",
-            "thirdparty/nnabla/third_party/zstd-1.5.5/build.cmake/lib",
+            "thirdparty/nnabla/third_party/inst_hdf5-hdf5-1_12_2/lib",
+            "thirdparty/nnabla/third_party/inst_libarchive-3.7.2/lib",
+            "thirdparty/nnabla/third_party/inst_protobuf-3.20.1/lib",
         ]
     )
 
     env.Append(
         LIBS=[
-            "nnabla_cli",
             "nnabla_utils",
-            "hdf5_hl",
-            "hdf5",
             "nnabla",
+            "hdf5",
+            "hdf5_hl",
+            "archive",
             "protobuf",
-            "protoc",
-            "zstd",
         ]
     )
 
