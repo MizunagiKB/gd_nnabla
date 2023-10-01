@@ -7,23 +7,18 @@ env.Append(CPPDEFINES={"nnabla_static_lib": 1})
 debug_or_release = "release" if env["target"] == "template_release" else "debug"
 
 if env["platform"] == "windows":
-    if debug_or_release == "release":
-        folder_name = "Release"
-    else:
-        folder_name = "Debug"
-
     libraries = [
         "nnabla_utils",
         "nnabla",
         "hdf5",
         "hdf5_hl",
         "archive",
-        "protobuf",
+        "libprotobuf",
     ]
 
     env.Append(
         LIBPATH=[
-            "thirdparty/nnabla/build.cmake/bin/{:s}".format(folder_name),
+            "thirdparty/nnabla/build.cmake/bin/Release",
             "thirdparty/nnabla/third_party/inst_hdf5-hdf5-1_12_2/lib",
             "thirdparty/nnabla/third_party/inst_libarchive-3.7.2/lib",
             "thirdparty/nnabla/third_party/inst_protobuf-3.20.1/lib",
@@ -55,7 +50,7 @@ env.Append(CPPPATH=["thirdparty/nnabla/include"])
 env.Append(CPPPATH=["src/"])
 
 
-sources = Glob("src/*.cpp")
+sources = glob("src/*.cpp")
 
 
 (extension_path,) = glob("demo/addons/*/*.gdextension")
